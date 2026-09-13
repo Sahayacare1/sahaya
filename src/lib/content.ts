@@ -530,6 +530,10 @@ export const FAQS = [
     q: "What if I need to cancel?",
     a: "Message us on WhatsApp as early as you can. We'll work with you to reschedule.",
   },
+  {
+    q: "What if the caregiver becomes unavailable?",
+    a: "SAHAYA can assist with finding a suitable replacement subject to caregiver availability.",
+  },
 ];
 
 /* ============================================================

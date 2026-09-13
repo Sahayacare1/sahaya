@@ -9,10 +9,10 @@
  * Format: country code + number, digits only. No `+`, spaces or dashes.
  * Example: "919876543210" for +91 98765 43210.
  */
-export const WHATSAPP_NUMBER = "919999999999";
+export const WHATSAPP_NUMBER = "918977023774";
 
 /** True while the number above is still the placeholder. */
-export const WHATSAPP_IS_PLACEHOLDER = WHATSAPP_NUMBER === "919999999999";
+export const WHATSAPP_IS_PLACEHOLDER = false;
 
 export const BRAND = {
   name: "SAHAYA",
@@ -23,8 +23,12 @@ export const BRAND = {
    * Aligned with the official logo lockup, which reads "Support. Care. Together."
    */
   promise: "Support. Care. Together.",
-  supporting:
-    "Trusted care for children and elderly family members when you cannot personally be there.",
+  /** Brand promise used in CTAs and hero sections. */
+  brandPromise: "Care. Trust. Peace of Mind.",
+  /** Hero label (small eyebrow above heading). */
+  heroEyebrow: "Trusted Family Care",
+  /** Hero description per master pack. */
+  heroSub: "Trusted support for children and elderly family members — whenever your family needs an extra pair of caring hands.",
   cta: "Request care",
   email: "hello@sahaya.care",
   /** The only market currently served — keep consistent with the FAQ. */
@@ -41,11 +45,12 @@ export const BRAND = {
 } as const;
 
 export const NAV_LINKS = [
-  { label: "Child care", href: "/child-care" },
-  { label: "Elder care", href: "/elder-care" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "Child care",   href: "/child-care" },
+  { label: "Elder care",   href: "/elder-care" },
+  { label: "Pricing",      href: "/pricing" },
   { label: "How it works", href: "/how-it-works" },
-  { label: "About", href: "/about-contact" },
+  { label: "About",        href: "/about" },
+  { label: "Contact",      href: "/contact" },
 ] as const;
 
 /**
@@ -53,8 +58,8 @@ export const NAV_LINKS = [
  * page cannot drift apart. These must stay consistent with the FAQ copy.
  */
 export const STATS = [
-  { value: 500, suffix: "+", label: "Families served" },
-  { value: 98, suffix: "%", label: "Satisfaction rate" },
-  { value: 200, suffix: "+", label: "Verified caregivers" },
-  { value: 24, suffix: "h", label: "Average match time" },
+  { value: 0,  suffix: "",   label: "Launching in Hyderabad" },
+  { value: 24, suffix: "h",  label: "Response time" },
+  { value: 100, suffix: "%", label: "Verified caregivers" },
+  { value: 0,  suffix: "",   label: "Hidden fees" },
 ] as const;
