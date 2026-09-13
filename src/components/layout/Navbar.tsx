@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -193,11 +192,14 @@ export default function Navbar() {
         <div className="mx-auto flex h-full max-w-7xl items-center gap-4 px-5 sm:px-6 lg:px-12">
           {/* Zone 1: brand mark. The logo lockup already includes the
               tagline ("Support. Care. Together."), so the navbar no
-              longer renders a separate subline. */}
+              longer renders a separate subline. Plain <img> is used
+              (not next/image) so the browser receives the exact
+              transparent PNG — no optimisation pipeline that could
+              strip the alpha channel or re-encode the background. */}
           <Link
             href="/"
             aria-label={`${BRAND.name} — home`}
-            className="relative shrink-0 transition-opacity hover:opacity-80"
+            className="relative block shrink-0 transition-opacity hover:opacity-80"
             style={{
               // The lockup is 1.85:1 — height tracks the row, width
               // is derived. At expanded height the logo sits at 60px
@@ -206,13 +208,19 @@ export default function Navbar() {
               width: scrolled ? "89px" : "111px",
             }}
           >
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={BRAND.logo}
               alt={`${BRAND.name} — ${BRAND.promise}`}
-              fill
-              sizes="(max-width: 768px) 89px, 111px"
-              priority
-              className="object-contain object-left"
+              // height/width set the rendered box; the file is 589×319
+              // (1.85:1), matching the container so the transparent
+              // background fits flush without leaving an ivory halo.
+              width={scrolled ? 89 : 111}
+              height={scrolled ? 48 : 60}
+              decoding="async"
+              fetchPriority="high"
+              draggable={false}
+              className="block h-full w-full select-none object-contain object-left"
             />
           </Link>
 

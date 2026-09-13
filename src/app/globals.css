@@ -101,7 +101,17 @@ video {
 }
 
 img {
-  /* Keeps the ivory page from flashing white while photos decode. */
+  /* Keeps the ivory page from flashing white while hero photos
+     decode. Scoped to the JS-driven reveal animation so it does NOT
+     fire on the brand logo (or any other always-visible image with
+     its own alpha). The logo lives in the navbar and is priority-
+     loaded — it does not need a placeholder, and applying one
+     paints a visible rectangle around the transparent PNG. */
+  background-color: transparent;
+}
+
+.js-reveal img,
+img.js-reveal {
   background-color: var(--color-teal-wash);
 }
 

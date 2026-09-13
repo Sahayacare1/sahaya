@@ -43,10 +43,10 @@ export const metadata: Metadata = {
     // center-crop square favicons, and the lockup's icon portion (the
     // "S" + person + heart) is centred, so the crop is clean.
     icon: [
-      { url: "/images/sahaya-logo.png", type: "image/png" },
+      { url: "/images/sahaya-logo-v2.png", type: "image/png" },
     ],
-    apple: [{ url: "/images/sahaya-logo.png", type: "image/png" }],
-    shortcut: ["/images/sahaya-logo.png"],
+    apple: [{ url: "/images/sahaya-logo-v2.png", type: "image/png" }],
+    shortcut: ["/images/sahaya-logo-v2.png"],
   },
   openGraph: {
     title: "SAHAYA — Trusted Child Care & Elder Care at Home",
