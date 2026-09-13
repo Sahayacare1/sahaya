@@ -134,7 +134,7 @@ export default function AboutContactClient() {
           { text: "We exist because" },
           { text: "family matters.", accent: true },
         ]}
-        sub={BRAND.supporting}
+        sub={BRAND.heroSub}
         image="/images/hero-background.webp"
         imagePosition="center 32%"
         scrimFrom="var(--color-teal-ink)"
