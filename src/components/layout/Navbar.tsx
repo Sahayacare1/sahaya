@@ -204,8 +204,8 @@ export default function Navbar() {
               // The lockup is 1.85:1 — height tracks the row, width
               // is derived. At expanded height the logo sits at 60px
               // tall; at compact height 48px tall.
-              height: scrolled ? "48px" : "60px",
-              width: scrolled ? "89px" : "111px",
+              height: scrolled ? "64px" : "80px",
+              width: scrolled ? "118px" : "148px",
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -215,8 +215,8 @@ export default function Navbar() {
               // height/width set the rendered box; the file is 589×319
               // (1.85:1), matching the container so the transparent
               // background fits flush without leaving an ivory halo.
-              width={scrolled ? 89 : 111}
-              height={scrolled ? 48 : 60}
+              width={scrolled ? 118 : 148}
+              height={scrolled ? 64 : 80}
               decoding="async"
               fetchPriority="high"
               draggable={false}
