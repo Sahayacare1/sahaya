@@ -1,26 +1,533 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   SAHAYA — DESIGN FOUNDATION
+   Ivory dominant · Deep Teal brand · Soft Teal support ·
+   Blush as a controlled accent only.
+
+   NOTE ON `@theme` (Tailwind v4):
+   `@theme inline` cannot reference other variables, so every
+   token below is written as a literal value. Downstream rules
+   consume the *generated* `--color-*` variables instead.
+   ============================================================ */
+
+@theme {
+  /* --- Palette --- */
+  --color-ivory:        #f8f6ef;
+  --color-ivory-deep:   #f1eee3;
+  --color-paper:        #ffffff;
+
+  --color-teal:         #285a5c;
+  --color-teal-deep:    #1c3a3b;
+  --color-teal-ink:     #0e2526;
+  --color-teal-soft:    #7fa7a2;
+  --color-teal-light:   #c8dedd;
+  --color-teal-wash:    #eef4f3;
+
+  --color-blush:        #d9a5a3;
+  --color-blush-dark:   #b8827f;
+  --color-blush-light:  #f2e4e3;
+
+  /* --- Fonts (variables injected by next/font in layout.tsx) --- */
+  --font-display: var(--font-quicksand), "Quicksand", ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    var(--font-nunito), "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* --- Named easing --- */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* --- Header height tokens: one source of truth for the whole app ---
+     The header is an announcement strip stacked on the nav row. When
+     scrolled, the strip collapses and the nav row goes compact, so the
+     header shrinks from `--header-h` to `--nav-h-compact`. */
+  --announce-h:      2.25rem;
+  --nav-h:           4.5rem;
+  --nav-h-compact:   3.75rem;
+  --header-h:        calc(var(--announce-h) + var(--nav-h));
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ------------------------------------------------------------
+   BASE
+   ------------------------------------------------------------ */
+*,
+*::before,
+*::after { box-sizing: border-box; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  /* `clip` rather than `hidden`: `overflow-x: hidden` makes the other
+     axis compute to `auto`, which turns the element into a scroll
+     container and BREAKS `position: sticky` for every descendant.
+     That is exactly what made the DayStory photo column inert. */
+  overflow-x: clip;
+  /* Lenis drives scrolling; keep native smooth off so they don't fight. */
+  scroll-behavior: auto;
+  /* Anchor links land below the fixed navbar. */
+  scroll-padding-top: var(--nav-h-compact);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-ivory);
+  color: var(--color-teal-deep);
+  font-family: var(--font-sans);
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--color-blush) 45%, transparent);
+  color: var(--color-teal-ink);
+}
+
+/* Keyboard focus only — never draw a ring on mouse clicks. */
+:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+/* On dark surfaces the teal ring disappears; use the soft teal instead. */
+.on-dark :focus-visible,
+[data-surface="dark"] :focus-visible {
+  outline-color: var(--color-teal-light);
+}
+
+/* Images never overflow their frame, and never cause a layout shift. */
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  /* Keeps the ivory page from flashing white while photos decode. */
+  background-color: var(--color-teal-wash);
+}
+
+/* Tap highlight is noisy on a light editorial layout. */
+button,
+a { -webkit-tap-highlight-color: transparent; }
+
+/* Lenis' own stylesheet is not imported, so replicate the essentials. */
+html.lenis-active {
+  scrollbar-width: none;
+}
+html.lenis-active::-webkit-scrollbar { display: none; }
+html.lenis-active [data-lenis-prevent] { overscroll-behavior: contain; }
+
+/* ------------------------------------------------------------
+   TYPOGRAPHY UTILITIES
+   Fluid display ramp. Clamped so nothing ever explodes on a
+   large monitor or collapses on a 360px phone.
+   ------------------------------------------------------------ */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.75rem, 7vw, 5.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.t-h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.1rem, 4.6vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.t-h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+.t-lead {
+  font-size: clamp(1rem, 1.35vw, 1.175rem);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+/* Keeps a paragraph of body copy at a comfortable measure. */
+.t-measure { max-width: 62ch; }
+
+/* ------------------------------------------------------------
+   SECTION RHYTHM
+   The original build hard-coded py-28 on nearly every section,
+   which flattened the page into an even rhythm with two dark
+   sections butted together. These helpers give the page a
+   deliberate rhythm instead.
+   ------------------------------------------------------------ */
+.section        { padding-block: clamp(4.5rem, 8vw, 7.5rem); }
+.section-tight  { padding-block: clamp(3rem, 5vw, 4.5rem); }
+.section-loose  { padding-block: clamp(6rem, 11vw, 10rem); }
+
+/* Two dark sections stacked back-to-back read as one slab.
+   Give the boundary an explicit, intentional treatment. */
+.dark-seam {
+  border-top: 1px solid color-mix(in srgb, var(--color-teal-soft) 16%, transparent);
+}
+
+/* ------------------------------------------------------------
+   BUTTONS
+   ------------------------------------------------------------ */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 1;
+  /* min-height guarantees a 44px touch target in every variant. */
+  min-height: 2.875rem;
+  padding: 0.9rem 1.75rem;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  transition: background-color 0.25s var(--ease-out-soft),
+              color 0.25s var(--ease-out-soft),
+              border-color 0.25s var(--ease-out-soft),
+              box-shadow 0.25s var(--ease-out-soft),
+              transform 0.25s var(--ease-out-soft);
+}
+.btn .btn-arrow { transition: transform 0.25s var(--ease-out-soft); }
+.btn:hover .btn-arrow { transform: translateX(4px); }
+.btn:active { transform: translateY(0) scale(0.985); }
+
+/* Compact modifier — replaces the `!px-4 !py-2` overrides the old
+   navbar used, which fought the base class and broke the padding scale. */
+.btn-sm {
+  font-size: 0.8125rem;
+  min-height: 2.375rem;
+  padding: 0.55rem 1.15rem;
+  gap: 0.4rem;
+}
+.btn-lg {
+  font-size: 1rem;
+  min-height: 3.25rem;
+  padding: 1.05rem 2.15rem;
+}
+.btn-block { width: 100%; }
+
+.btn-primary {
+  background: var(--color-teal);
+  color: #fff;
+  box-shadow: 0 8px 20px -6px color-mix(in srgb, var(--color-teal) 45%, transparent);
+}
+.btn-primary:hover {
+  background: var(--color-teal-deep);
+  box-shadow: 0 12px 26px -6px color-mix(in srgb, var(--color-teal) 55%, transparent);
+  transform: translateY(-1px);
+}
+
+.btn-blush {
+  background: var(--color-blush);
+  color: var(--color-teal-deep);
+  box-shadow: 0 8px 20px -6px color-mix(in srgb, var(--color-blush) 50%, transparent);
+}
+.btn-blush:hover {
+  background: var(--color-blush-dark);
+  color: #fff;
+  box-shadow: 0 12px 26px -6px color-mix(in srgb, var(--color-blush) 60%, transparent);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-teal);
+  border-color: color-mix(in srgb, var(--color-teal) 32%, transparent);
+}
+.btn-outline:hover {
+  background: var(--color-teal);
+  color: #fff;
+  border-color: var(--color-teal);
+  transform: translateY(-1px);
+}
+
+/* On dark photographic or teal surfaces. Replaces the scattered
+   `!text-white !border-white/20` override soup. */
+.btn-ghost {
+  background: color-mix(in srgb, #fff 8%, transparent);
+  color: #fff;
+  border-color: color-mix(in srgb, #fff 24%, transparent);
+  backdrop-filter: blur(8px);
+}
+.btn-ghost:hover {
+  background: color-mix(in srgb, #fff 16%, transparent);
+  border-color: color-mix(in srgb, #fff 45%, transparent);
+  transform: translateY(-1px);
+}
+
+/* ------------------------------------------------------------
+   CARDS
+   ------------------------------------------------------------ */
+.card {
+  background: var(--color-paper);
+  border: 1px solid color-mix(in srgb, var(--color-teal-soft) 30%, transparent);
+  border-radius: 1.5rem;
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--color-teal-deep) 5%, transparent),
+              0 8px 24px -14px color-mix(in srgb, var(--color-teal-deep) 22%, transparent);
+  transition: transform 0.35s var(--ease-out-soft),
+              box-shadow 0.35s var(--ease-out-soft),
+              border-color 0.35s var(--ease-out-soft);
+}
+.card-interactive:hover {
+  border-color: color-mix(in srgb, var(--color-teal-soft) 65%, transparent);
+  box-shadow: 0 2px 4px color-mix(in srgb, var(--color-teal-deep) 6%, transparent),
+              0 20px 44px -18px color-mix(in srgb, var(--color-teal-deep) 30%, transparent);
+  transform: translateY(-4px);
+}
+.card-teal  { background: var(--color-teal-wash);  border-color: color-mix(in srgb, var(--color-teal-soft) 42%, transparent); }
+.card-blush { background: var(--color-blush-light); border-color: color-mix(in srgb, var(--color-blush) 42%, transparent); }
+
+/* Dark-surface card, used on the night panels. */
+.card-night {
+  background: color-mix(in srgb, #fff 4%, transparent);
+  border: 1px solid color-mix(in srgb, #fff 8%, transparent);
+  border-radius: 1.5rem;
+  transition: background 0.35s var(--ease-out-soft),
+              border-color 0.35s var(--ease-out-soft);
+}
+.card-night:hover {
+  background: color-mix(in srgb, #fff 7%, transparent);
+  border-color: color-mix(in srgb, #fff 14%, transparent);
+}
+
+/* ------------------------------------------------------------
+   CHIPS · BADGES · EYEBROWS
+   ------------------------------------------------------------ */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.9rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+  line-height: 1;
+}
+.chip-teal  { background: color-mix(in srgb, var(--color-teal) 88%, #000); color: #fff; }
+.chip-blush { background: color-mix(in srgb, var(--color-blush) 90%, #000); color: var(--color-teal-ink); }
+.chip-ivory {
+  background: color-mix(in srgb, #fff 90%, transparent);
+  color: var(--color-teal);
+  backdrop-filter: blur(8px);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-teal-soft);
+}
+/* A short rule before the label gives it intent without decoration. */
+.eyebrow::before {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+.eyebrow-flush::before { display: none; }
+
+.icon-badge {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: color-mix(in srgb, var(--color-teal-light) 55%, transparent);
+  color: var(--color-teal);
+  transition: background-color 0.3s var(--ease-out-soft), transform 0.3s var(--ease-out-soft);
+}
+.icon-badge-blush {
+  background: color-mix(in srgb, var(--color-blush) 22%, transparent);
+  color: var(--color-blush-dark);
+}
+
+/* ------------------------------------------------------------
+   FORM FIELDS
+   ------------------------------------------------------------ */
+.field {
+  width: 100%;
+  background: var(--color-paper);
+  border: 1px solid color-mix(in srgb, var(--color-teal-soft) 42%, transparent);
+  border-radius: 0.875rem;
+  padding: 0.8rem 1.05rem;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: var(--color-teal-deep);
+  transition: border-color 0.2s var(--ease-out-soft), box-shadow 0.2s var(--ease-out-soft);
+}
+.field::placeholder { color: color-mix(in srgb, var(--color-teal-soft) 70%, transparent); }
+.field:focus {
+  outline: none;
+  border-color: var(--color-teal-soft);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-teal-soft) 22%, transparent);
+}
+.field:focus-visible { outline: none; }
+/* Invalid state, shown only after validation has run. */
+.field[aria-invalid="true"] {
+  border-color: var(--color-blush-dark);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-blush-dark) 18%, transparent);
+}
+
+/* The enquiry form sits on a near-black panel. */
+.field-night {
+  background: color-mix(in srgb, #fff 6%, transparent);
+  border: 1px solid color-mix(in srgb, #fff 14%, transparent);
+  color: #fff;
+}
+.field-night::placeholder { color: color-mix(in srgb, var(--color-teal-light) 45%, transparent); }
+.field-night:focus {
+  border-color: var(--color-teal-light);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-teal-light) 22%, transparent);
+}
+/* The native date/select glyphs are near-black on a dark field. */
+.field-night[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1) opacity(0.55); }
+.field-night option { background: var(--color-teal-deep); color: #fff; }
+
+.field-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: color-mix(in srgb, var(--color-teal-soft) 60%, transparent);
+}
+.on-dark .field-label,
+.field-label-night { color: color-mix(in srgb, var(--color-teal-light) 75%, transparent); }
+
+/* ------------------------------------------------------------
+   DECORATION
+   ------------------------------------------------------------ */
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+/* Photographic overlay stack — one definition, reused everywhere. */
+.scrim     { position: absolute; inset: 0; }
+.scrim-b-l { background: linear-gradient(to right, color-mix(in srgb, var(--color-teal-ink) 88%, transparent), color-mix(in srgb, var(--color-teal-ink) 55%, transparent) 48%, transparent); }
+.scrim-t   { background: linear-gradient(to top, color-mix(in srgb, var(--color-teal-ink) 88%, transparent), color-mix(in srgb, var(--color-teal-ink) 28%, transparent) 45%, transparent); }
+
+/* ------------------------------------------------------------
+   MARQUEE
+   The track is rendered twice and translated exactly -50%, which
+   only loops seamlessly if every gap is uniform — including the
+   one across the join. `--marquee-gap` is shared by the flex gap
+   and the trailing padding so the seam matches the rest.
+   ------------------------------------------------------------ */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: var(--marquee-gap, 3.25rem);
+  padding-right: var(--marquee-gap, 3.25rem);
+  animation: marquee-scroll var(--marquee-duration, 34s) linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track { animation-play-state: paused; }
+@keyframes marquee-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+/* ------------------------------------------------------------
+   MOTION
+   ------------------------------------------------------------ */
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-9px); }
+}
+.animate-float-soft { animation: float-soft 6.5s ease-in-out infinite; }
+
+/* Slow Ken Burns for full-bleed hero photos. */
+@keyframes ken-burns {
+  from { transform: scale(1.07); }
+  to   { transform: scale(1); }
+}
+.animate-ken-burns { animation: ken-burns 9s var(--ease-out-soft) both; }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.45; transform: scale(0.82); }
+}
+.animate-pulse-dot { animation: pulse-dot 2.2s ease-in-out infinite; }
+
+/* ------------------------------------------------------------
+   FAIL-SAFE FOR ANIMATED CONTENT
+   Everything that GSAP reveals starts hidden. If the script never
+   runs — JS disabled, hydration error, a blocked chunk — that
+   content must still become visible on its own. Three layers:
+
+     1. `no-js` on <html> covers JS being disabled entirely.
+     2. The reduced-motion block below covers the opt-out case.
+     3. A timer in `layout.tsx` covers JS being enabled but React
+        failing to hydrate — see the `__sahayaHydrated` handshake.
+
+   `Reveal` also runs its own watchdog for the case where React
+   hydrates but a ScrollTrigger never fires.
+   ------------------------------------------------------------ */
+@keyframes force-visible { to { opacity: 1; visibility: visible; } }
+
+.no-js .js-reveal { animation: force-visible 0s 0.1s forwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* Anything waiting on a scroll reveal is shown immediately. */
+  .js-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .marquee-track { animation: none; }
+  .animate-float-soft,
+  .animate-ken-burns,
+  .animate-pulse-dot { animation: none; }
+}
+
+/* ------------------------------------------------------------
+   SCROLLBAR (progressive enhancement; ignored where unsupported)
+   ------------------------------------------------------------ */
+@supports (scrollbar-color: red blue) {
+  html { scrollbar-color: color-mix(in srgb, var(--color-teal-soft) 55%, transparent) transparent; }
+  @media (min-width: 1024px) { html { scrollbar-width: thin; } }
 }
