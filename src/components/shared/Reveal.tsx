@@ -93,6 +93,10 @@ export default function Reveal({
                          { opacity: 0, y };
 
     const targets = stagger ? Array.from(el.children) : el;
+    if (!targets || (Array.isArray(targets) && targets.length === 0)) {
+      el.style.opacity = "1";
+      return;
+    }
     if (stagger) gsap.set(el, { opacity: 1 });
 
     const ctx = gsap.context(() => {

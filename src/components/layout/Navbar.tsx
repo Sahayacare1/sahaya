@@ -231,6 +231,14 @@ export default function Navbar() {
             aria-label="Primary"
             className="hidden items-center gap-0.5 md:flex"
           >
+            {/* Home */}
+            <Link
+              href="/"
+              aria-current={pathname === "/" ? "page" : undefined}
+              className={linkClass(pathname === "/")}
+            >
+              Home
+            </Link>
             {/* Services dropdown */}
             <div
               ref={servicesRef}
@@ -307,6 +315,15 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+
+            {/* Contact */}
+            <Link
+              href="/about-contact"
+              aria-current={pathname === "/about-contact" ? "page" : undefined}
+              className={linkClass(pathname === "/about-contact")}
+            >
+              Contact
+            </Link>
           </nav>
 
           {/* Zone 3: CTA + mobile toggle */}
@@ -371,6 +388,17 @@ export default function Navbar() {
           aria-label="Mobile"
           className="max-h-[calc(100dvh-var(--header-h))] overflow-y-auto px-5 pb-6 pt-3 sm:px-6"
         >
+          {/* Home */}
+          <Link
+            href="/"
+            aria-current={pathname === "/" ? "page" : undefined}
+            className={`flex items-center justify-between border-b border-[var(--color-teal-light)]/45 py-4 font-display text-base font-semibold transition-colors ${
+              pathname === "/" ? "text-[var(--color-teal)]" : "text-[var(--color-teal)]/70 hover:text-[var(--color-teal)]"
+            }`}
+          >
+            Home
+            {pathname === "/" && <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[var(--color-blush)]" />}
+          </Link>
           {SERVICES.map((service) => (
             <Link
               key={service.href}
@@ -414,6 +442,18 @@ export default function Navbar() {
               </Link>
             );
           })}
+
+          {/* Contact */}
+          <Link
+            href="/about-contact"
+            aria-current={pathname === "/about-contact" ? "page" : undefined}
+            className={`flex items-center justify-between border-b border-[var(--color-teal-light)]/45 py-4 font-display text-base font-semibold transition-colors ${
+              pathname === "/about-contact" ? "text-[var(--color-teal)]" : "text-[var(--color-teal)]/70 hover:text-[var(--color-teal)]"
+            }`}
+          >
+            Contact
+            {pathname === "/about-contact" && <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[var(--color-blush)]" />}
+          </Link>
 
           <button
             onClick={openEnquiry}
