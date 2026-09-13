@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -190,30 +191,29 @@ export default function Navbar() {
         }`}
       >
         <div className="mx-auto flex h-full max-w-7xl items-center gap-4 px-5 sm:px-6 lg:px-12">
-          {/* Zone 1: wordmark */}
+          {/* Zone 1: brand mark. The logo lockup already includes the
+              tagline ("Support. Care. Together."), so the navbar no
+              longer renders a separate subline. */}
           <Link
             href="/"
             aria-label={`${BRAND.name} — home`}
-            className="flex shrink-0 flex-col justify-center leading-none transition-opacity hover:opacity-75"
+            className="relative shrink-0 transition-opacity hover:opacity-80"
+            style={{
+              // The lockup is 1.85:1 — height tracks the row, width
+              // is derived. At expanded height the logo sits at 60px
+              // tall; at compact height 48px tall.
+              height: scrolled ? "48px" : "60px",
+              width: scrolled ? "89px" : "111px",
+            }}
           >
-            <span
-              className={`font-display font-bold tracking-[0.12em] text-[var(--color-teal)] transition-[font-size] duration-300 ${
-                scrolled ? "text-[1.15rem]" : "text-[1.5rem]"
-              }`}
-            >
-              {BRAND.name}
-            </span>
-            {/* Faded and collapsed rather than set to 0px font-size.
-                An explicit height (not `max-h`) so the text is never
-                clipped by its own line box at small sizes. */}
-            <span
-              aria-hidden="true"
-              className={`overflow-hidden whitespace-nowrap text-[0.5625rem] uppercase leading-none tracking-[0.16em] text-[var(--color-teal-soft)] transition-all duration-300 ${
-                scrolled ? "mt-0 h-0 opacity-0" : "mt-1.5 h-3.5 opacity-100"
-              }`}
-            >
-              {BRAND.promise}
-            </span>
+            <Image
+              src={BRAND.logo}
+              alt={`${BRAND.name} — ${BRAND.promise}`}
+              fill
+              sizes="(max-width: 768px) 89px, 111px"
+              priority
+              className="object-contain object-left"
+            />
           </Link>
 
           <div className="flex-1" />

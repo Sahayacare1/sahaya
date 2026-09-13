@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowUpRight,
@@ -31,12 +32,21 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* ── Brand ── */}
           <div className="lg:col-span-2">
-            <p className="font-display text-3xl font-bold tracking-[0.1em] text-white">
-              {BRAND.name}
-            </p>
-            <p className="mt-1.5 font-display text-[0.6rem] uppercase tracking-[0.28em] text-[var(--color-teal-soft)]">
-              {BRAND.promise}
-            </p>
+            {/* The official lockup carries the tagline. It is light-on-
+                cream by design, so on the dark footer it sits inside a
+                soft brand pill that preserves the teal + blush colors. */}
+            <div className="inline-flex rounded-2xl bg-[var(--color-ivory)]/95 px-3.5 py-3 ring-1 ring-white/10 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.45)] sm:px-5 sm:py-4">
+              <div className="relative h-[44px] w-[82px] sm:h-[60px] sm:w-[111px]">
+                <Image
+                  src={BRAND.logo}
+                  alt={`${BRAND.name} — ${BRAND.promise}`}
+                  fill
+                  sizes="(max-width: 640px) 82px, 111px"
+                  className="object-contain object-left"
+                />
+              </div>
+            </div>
+
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/55">
               Trusted, verified caregivers for your children and your elderly
               parents — so you can work, travel and live without the worry.

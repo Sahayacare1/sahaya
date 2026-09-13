@@ -38,6 +38,16 @@ export const metadata: Metadata = {
     "SAHAYA",
   ],
   alternates: { canonical: "/" },
+  icons: {
+    // The official brand lockup. Modern browsers center-crop square
+    // favicons, and the lockup's icon portion (the "S" + person + heart)
+    // sits centred on a generous cream backdrop, so it crops cleanly.
+    icon: [
+      { url: "/images/sahaya-logo.jpeg", type: "image/jpeg" },
+    ],
+    apple: [{ url: "/images/sahaya-logo.jpeg", type: "image/jpeg" }],
+    shortcut: ["/images/sahaya-logo.jpeg"],
+  },
   openGraph: {
     title: "SAHAYA — Trusted Child Care & Elder Care at Home",
     description: DESCRIPTION,

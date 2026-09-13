@@ -18,8 +18,11 @@ export const BRAND = {
   name: "SAHAYA",
   /** Primary tagline. */
   tagline: "When You Can't Be There, SAHAYA Can.",
-  /** Short lockup used where the full tagline is too long (navbar, footer). */
-  promise: "Care. Trust. Peace of Mind.",
+  /**
+   * Short lockup used where the full tagline is too long (navbar, footer).
+   * Aligned with the official logo lockup, which reads "Support. Care. Together."
+   */
+  promise: "Support. Care. Together.",
   supporting:
     "Trusted care for children and elderly family members when you cannot personally be there.",
   cta: "Request care",
@@ -33,6 +36,8 @@ export const BRAND = {
    */
   scopeNote:
     "SAHAYA currently provides non-medical personal care and companionship services unless otherwise specified.",
+  /** Path to the brand logo (with tagline baked in). */
+  logo: "/images/sahaya-logo.jpeg",
 } as const;
 
 export const NAV_LINKS = [
