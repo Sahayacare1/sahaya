@@ -39,14 +39,14 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/" },
   icons: {
-    // The official brand lockup. Modern browsers center-crop square
-    // favicons, and the lockup's icon portion (the "S" + person + heart)
-    // sits centred on a generous cream backdrop, so it crops cleanly.
+    // The official brand lockup (transparent PNG). Modern browsers
+    // center-crop square favicons, and the lockup's icon portion (the
+    // "S" + person + heart) is centred, so the crop is clean.
     icon: [
-      { url: "/images/sahaya-logo.jpeg", type: "image/jpeg" },
+      { url: "/images/sahaya-logo.png", type: "image/png" },
     ],
-    apple: [{ url: "/images/sahaya-logo.jpeg", type: "image/jpeg" }],
-    shortcut: ["/images/sahaya-logo.jpeg"],
+    apple: [{ url: "/images/sahaya-logo.png", type: "image/png" }],
+    shortcut: ["/images/sahaya-logo.png"],
   },
   openGraph: {
     title: "SAHAYA — Trusted Child Care & Elder Care at Home",

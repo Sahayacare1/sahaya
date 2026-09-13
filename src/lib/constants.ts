@@ -36,8 +36,8 @@ export const BRAND = {
    */
   scopeNote:
     "SAHAYA currently provides non-medical personal care and companionship services unless otherwise specified.",
-  /** Path to the brand logo (with tagline baked in). */
-  logo: "/images/sahaya-logo.jpeg",
+  /** Path to the brand logo (with tagline baked in, transparent background). */
+  logo: "/images/sahaya-logo.png",
 } as const;
 
 export const NAV_LINKS = [
