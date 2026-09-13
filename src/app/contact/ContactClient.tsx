@@ -73,7 +73,7 @@ export default function ContactClient() {
         ]}
         sub="Fill in your details and we'll open WhatsApp with a pre-filled message, ready to send."
         image="/images/trust-caregiver.webp"
-        imagePosition="center 20%"
+        imagePosition="center center"
         scrimFrom="var(--color-teal-ink)"
       />
 

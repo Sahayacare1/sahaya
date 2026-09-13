@@ -3,6 +3,9 @@ import Marquee from "@/components/home/Marquee";
 import ServiceSelector from "@/components/home/ServiceSelector";
 import WhyChooseUs from "@/components/shared/WhyChooseUs";
 import CareTimeline from "@/components/shared/CareTimeline";
+import EmotionalCounter from "@/components/home/EmotionalCounter";
+import BeforeAfter from "@/components/home/BeforeAfter";
+import FounderStory from "@/components/home/FounderStory";
 import HowItWorksPreview from "@/components/home/HowItWorksPreview";
 import TargetCustomers from "@/components/shared/TargetCustomers";
 import CarePlans from "@/components/shared/CarePlans";
@@ -49,12 +52,15 @@ export default function HomePage() {
       <ServiceSelector />
       <WhyChooseUs />
       <CareTimeline />
+      <EmotionalCounter />
+      <BeforeAfter />
       <HowItWorksPreview />
       <TargetCustomers />
       <CarePlans />
       <PricingPreview />
       <SafetyGrid />
       <Testimonials />
+      <FounderStory />
       <StatsStrip />
       <FaqAccordion limit={6} />
       <FinalCTA />

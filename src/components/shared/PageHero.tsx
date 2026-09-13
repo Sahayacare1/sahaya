@@ -76,7 +76,7 @@ export default function PageHero({
       );
 
       gsap.to(bgRef.current, {
-        yPercent: 14,
+        yPercent: 8,
         ease: "none",
         scrollTrigger: {
           trigger: section,

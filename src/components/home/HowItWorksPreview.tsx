@@ -48,7 +48,8 @@ export default function HowItWorksPreview() {
         tl.fromTo(
           media,
           { clipPath: "inset(0 100% 0 0)" },
-          { clipPath: "inset(0 0% 0 0)", duration: 1, ease: "power4.inOut" }
+          { clipPath: "inset(0 0% 0 0)", duration: 1, ease: "power4.inOut",
+            onComplete: () => { if (media) media.style.clipPath = "none"; } }
         ).fromTo(
           content,
           { opacity: 0, y: 18 },
@@ -95,9 +96,9 @@ export default function HowItWorksPreview() {
               <li key={n}>
                 <article className="hiw-card group card-night h-full overflow-hidden">
                   {/* Image with curtain reveal */}
-                  <div className="relative aspect-[16/10] overflow-hidden">
+                  <div className="relative h-[500px] sm:h-[540px] lg:h-[560px] overflow-hidden rounded-t-[inherit]">
                     <div
-                      className="hiw-media absolute inset-0"
+                      className="hiw-media absolute inset-0 w-full h-full"
                       style={{ clipPath: "inset(0 100% 0 0)" }}
                     >
                       <img
@@ -106,7 +107,7 @@ export default function HowItWorksPreview() {
                         loading="lazy"
                         decoding="async"
                         sizes="(max-width: 640px) 100vw, 50vw"
-                        className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                       />
                     </div>
                     <div

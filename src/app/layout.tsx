@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SmoothScroll from "@/components/shared/SmoothScroll";
+import FloatingWhatsApp from "@/components/shared/FloatingWhatsApp";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -137,6 +138,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <Footer />
+        <FloatingWhatsApp />
       </body>
     </html>
   );

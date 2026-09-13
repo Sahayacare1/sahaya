@@ -6,6 +6,7 @@ import Reveal from "@/components/shared/Reveal";
 import TargetCustomers from "@/components/shared/TargetCustomers";
 import FaqAccordion from "@/components/shared/FaqAccordion";
 import WhatsAppCTA from "@/components/shared/WhatsAppCTA";
+import FounderStory from "@/components/home/FounderStory";
 import { BRAND } from "@/lib/constants";
 import { ABOUT } from "@/lib/content";
 
@@ -62,6 +63,7 @@ export default function AboutClient() {
       </section>
 
       <TargetCustomers />
+      <FounderStory />
       <FaqAccordion />
 
       {/* CTA */}
