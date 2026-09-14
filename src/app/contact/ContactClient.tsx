@@ -72,7 +72,7 @@ export default function ContactClient() {
           { text: "We're here to help.", accent: true },
         ]}
         sub="Fill in your details and we'll open WhatsApp with a pre-filled message, ready to send."
-        image="/images/trust-caregiver.webp"
+        image="/images/story-pickup.webp"
         imagePosition="center center"
         scrimFrom="var(--color-teal-ink)"
       />

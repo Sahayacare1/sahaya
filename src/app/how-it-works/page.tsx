@@ -26,7 +26,7 @@ export default function HowItWorksPage() {
           { text: "start to finish.", accent: true },
         ]}
         sub="No paperwork, no waiting rooms, no agency runaround. One message starts the process — and the SAHAYA team handles the rest."
-        image="/images/trust-caregiver.webp"
+        image="/images/hero-background.webp"
         imagePosition="center center"
         scrimFrom="var(--color-teal-ink)"
       >

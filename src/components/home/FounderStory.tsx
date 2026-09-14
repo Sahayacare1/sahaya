@@ -45,19 +45,13 @@ export default function FounderStory() {
               {/* Main founder image */}
               <div
                 ref={imgRef}
-                className="relative rounded-[2rem] overflow-hidden aspect-[3/4] max-w-sm mx-auto lg:mx-0 shadow-[0_40px_80px_-20px_rgba(28,58,59,0.2)] will-change-transform"
+                className="relative rounded-[2rem] overflow-hidden aspect-[3/4] max-w-sm mx-auto lg:mx-0 shadow-[0_40px_80px_-20px_rgba(28,58,59,0.2)] will-change-transform bg-gradient-to-br from-[#C8DEDD] via-[#EEF4F3] to-[#F2E4E3]"
               >
                 <img
                   src="/images/founder.webp"
-                  alt="SAHAYA founder"
+                  alt="SAHAYA founder Prashanth"
                   className="w-full h-full object-cover"
-                  onError={(e) => {
-                    // Fallback gradient if image not yet added
-                    e.currentTarget.style.display = "none";
-                  }}
                 />
-                {/* Fallback gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#C8DEDD] via-[#EEF4F3] to-[#F2E4E3] -z-10" />
               </div>
 
               {/* Floating quote card */}
