@@ -30,7 +30,7 @@ export const BRAND = {
   /** Hero description per master pack. */
   heroSub: "Trusted support for children and elderly family members — whenever your family needs an extra pair of caring hands.",
   cta: "Request care",
-  email: "hello@sahaya.care",
+  email: "",
   /** The only market currently served — keep consistent with the FAQ. */
   city: "Hyderabad",
   serviceArea: "Hyderabad, India",
@@ -58,8 +58,8 @@ export const NAV_LINKS = [
  * page cannot drift apart. These must stay consistent with the FAQ copy.
  */
 export const STATS = [
-  { value: 0,  suffix: "",   label: "Launching in Hyderabad" },
-  { value: 24, suffix: "h",  label: "Response time" },
-  { value: 100, suffix: "%", label: "Verified caregivers" },
-  { value: 0,  suffix: "",   label: "Hidden fees" },
+  { value: 0,   suffix: "",   label: "Launching in Hyderabad" },
+  { value: 24,  suffix: "h",  label: "Response time" },
+  { value: 100, suffix: "%",  label: "Verified caregivers" },
+  { value: 0,   suffix: "",   label: "Hidden fees" },
 ] as const;

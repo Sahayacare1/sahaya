@@ -164,13 +164,15 @@ export default function Navbar() {
             {BRAND.promise}
           </p>
           <div className="flex shrink-0 items-center gap-5">
-            <a
-              href={`mailto:${BRAND.email}`}
-              className="hidden items-center gap-1.5 text-xs text-white/70 transition-colors hover:text-white sm:inline-flex"
-            >
-              <Mail size={12} aria-hidden />
-              {BRAND.email}
-            </a>
+            {BRAND.email && (
+              <a
+                href={`mailto:${BRAND.email}`}
+                className="hidden items-center gap-1.5 text-xs text-white/70 transition-colors hover:text-white sm:inline-flex"
+              >
+                <Mail size={12} aria-hidden />
+                {BRAND.email}
+              </a>
+            )}
             <button
               type="button"
               onClick={openEnquiry}
