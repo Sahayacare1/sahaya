@@ -26,8 +26,8 @@ export default function HowItWorksPage() {
           { text: "start to finish.", accent: true },
         ]}
         sub="No paperwork, no waiting rooms, no agency runaround. One message starts the process — and the SAHAYA team handles the rest."
-        image="/images/hero-background.webp"
-        imagePosition="center center"
+        image="/images/child-care.webp"
+        imagePosition="center 30%"
         scrimFrom="var(--color-teal-ink)"
       >
         <WhatsAppCTA service="Family Care" label="Start your request" />

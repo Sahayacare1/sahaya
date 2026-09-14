@@ -54,7 +54,7 @@ export default function PageHero({
   sub,
   image,
   imagePosition = "center 30%",
-  heightClass = "min-h-[68svh]",
+  heightClass = "min-h-[80svh]",
   scrimFrom = "var(--color-teal-ink)",
   children,
   aside,
