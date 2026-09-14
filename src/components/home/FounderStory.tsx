@@ -97,7 +97,7 @@ export default function FounderStory() {
             <div className="mt-10 flex items-center gap-4">
               <div className="w-12 h-px bg-[#D9A5A3]" />
               <div>
-                <p className="font-display font-bold text-[#1C3A3B] text-base">Varun Reddy</p>
+                <p className="font-display font-bold text-[#1C3A3B] text-base">Prashanth</p>
                 <p className="text-xs text-[#7FA7A2] uppercase tracking-widest mt-0.5">Founder, SAHAYA</p>
               </div>
             </div>

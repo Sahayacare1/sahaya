@@ -9,7 +9,7 @@
  * Format: country code + number, digits only. No `+`, spaces or dashes.
  * Example: "919876543210" for +91 98765 43210.
  */
-export const WHATSAPP_NUMBER = "918977023774";
+export const WHATSAPP_NUMBER = "917093122291";
 
 /** True while the number above is still the placeholder. */
 export const WHATSAPP_IS_PLACEHOLDER = false;

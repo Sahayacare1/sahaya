@@ -21,7 +21,7 @@ export default function AboutClient() {
         ]}
         sub={BRAND.heroSub}
         image="/images/hero-background.webp"
-        imagePosition="center 32%"
+        imagePosition="center center"
         scrimFrom="var(--color-teal-ink)"
       />
 

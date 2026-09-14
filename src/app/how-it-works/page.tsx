@@ -27,7 +27,7 @@ export default function HowItWorksPage() {
         ]}
         sub="No paperwork, no waiting rooms, no agency runaround. One message starts the process — and the SAHAYA team handles the rest."
         image="/images/trust-caregiver.webp"
-        imagePosition="center 22%"
+        imagePosition="center center"
         scrimFrom="var(--color-teal-ink)"
       >
         <WhatsAppCTA service="Family Care" label="Start your request" />

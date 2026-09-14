@@ -136,7 +136,7 @@ export default function AboutContactClient() {
         ]}
         sub={BRAND.heroSub}
         image="/images/hero-background.webp"
-        imagePosition="center 32%"
+        imagePosition="center center"
         scrimFrom="var(--color-teal-ink)"
       />
 
