@@ -436,18 +436,6 @@ export default function Navbar() {
             );
           })}
 
-          {/* Contact */}
-          <Link
-            href="/contact"
-            aria-current={pathname === "/contact" ? "page" : undefined}
-            className={`flex items-center justify-between border-b border-[var(--color-teal-light)]/45 py-4 font-display text-base font-semibold transition-colors ${
-              pathname === "/contact" ? "text-[var(--color-teal)]" : "text-[var(--color-teal)]/70 hover:text-[var(--color-teal)]"
-            }`}
-          >
-            Contact
-            {pathname === "/contact" && <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[var(--color-blush)]" />}
-          </Link>
-
           <button
             onClick={openEnquiry}
             className="btn btn-primary btn-block mt-5"
